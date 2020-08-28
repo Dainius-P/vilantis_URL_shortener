@@ -4,7 +4,6 @@ from .views import *
 app_name = "backend"
 
 urlpatterns = [
-    path('', index, name='index'),
     path('<str:short_url_id>/',
         redirect_to_long_url,
         name='redirect_to_long_url'
