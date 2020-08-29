@@ -9,8 +9,6 @@ CORS_ORIGIN_WHITELIST = os.environ.get(
     "CORS_ORIGIN_WHITELIST", "http://127.0.0.1"
 ).split(" ")
 
-print(CORS_ORIGIN_WHITELIST)
-
 # Application definition
 
 INSTALLED_APPS = [
