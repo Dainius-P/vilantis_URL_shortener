@@ -28,13 +28,13 @@ def redirect_to_long_url(request, short_url_id, *args, **kwargs):
 
     # Check if short url hasn't exceeded the maximum number of redirects and
     # if it is not expired
-    if(obj.expiration_datetime < timezone.now() or
+    if not obj.is_active:
+        raise Http404
+    elif(obj.expiration_datetime < timezone.now() or
         obj.access_counter >= obj.access_limit
     ):
         obj.is_active = False
         obj.save()
-        raise Http404
-    elif not obj.is_active:
         raise Http404
 
     obj.access_counter += 1

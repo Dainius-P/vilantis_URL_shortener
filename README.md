@@ -18,7 +18,7 @@ Implement a URL shortening service using Django in compliance with the requireme
 1. `docker-compose up`
 1. There should now be two servers running:
   - [http://localhost:8000](http://localhost:8000) Django APP
-  - [http://localhost:3000/](http://localhost:3000/) React app
+  - [http://localhost:3000](http://localhost:3000) React app
 
 To run in detach mode, execute `docker-compose up` command in two steps:
 - `docker-compose up --detach backend`
