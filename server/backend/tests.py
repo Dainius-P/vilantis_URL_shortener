@@ -30,7 +30,7 @@ class AccountTests(APITestCase):
         self.assertEqual(redirect_response.url, short_url_obj.long_url)
 
     def test_very_long_url_to_short_url(self):
-        url = reverse('api:generate_short_url')
+        url = reverse('backend:generate_short_url')
         data = {"long_url": "https://www.google.com/maps/place/Kurtuv%C4%97nai+regional+park/@55.8124971,23.0073874,3a,75y,340h,90t/data=!3m8!1e1!3m6!1sAF1QipPwgVise_4lVEAMnHPegN2jijvHRTE-YeFGP6Cx!2e10!3e11!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPwgVise_4lVEAMnHPegN2jijvHRTE-YeFGP6Cx%3Dw86-h86-k-no-pi0-ya298-ro-0-fo100!7i8000!8i4000!4m5!3m4!1s0x0:0x11c2fdac35593e03!8m2!3d55.8124971!4d23.0073873"}
 
         # Try to generate a short url from a very long URL
