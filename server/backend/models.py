@@ -1,3 +1,4 @@
+from django.core.validators import URLValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -5,7 +6,10 @@ from datetime import timedelta
 import string
 import random
 
+schema_validate = URLValidator(schemes=["http", "https"])
+
 class ShortURLModel(models.Model):
+
     def generate_expiration_datetime():
         return timezone.now() + timedelta(days=360)
 
@@ -28,12 +32,16 @@ class ShortURLModel(models.Model):
     expiration_datetime = models.DateTimeField(
         default=generate_expiration_datetime
     )
-    long_url = models.URLField()
-    access_limit = models.PositiveSmallIntegerField(default=100)
+    long_url = models.URLField(validators=[schema_validate])
+    access_limit = models.PositiveSmallIntegerField(null=True, blank=True)
     access_counter = models.PositiveSmallIntegerField(default=0, editable=False)
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
 
     def created_at_formated(self):
         return self.created_at.strftime("%Y-%m-%d %H:%M:%S")
